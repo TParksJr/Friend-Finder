@@ -2,10 +2,6 @@ var friends = require("../data/friends.js");
 
 module.exports = function (app) {
 
-    function getSum(total, num) {
-        return total + num;
-    }
-
     app.get("/api/friends", function (req, res) {
         res.json(friends);
     });
@@ -13,6 +9,7 @@ module.exports = function (app) {
     app.post("/api/friends", function (req, res) {
 
         var results = req.body;
+        console.log("Results are: " + results);
         var newUserScores = results.scores;
         var matchName = "";
         var matchImage = "";
@@ -30,8 +27,14 @@ module.exports = function (app) {
             };
         };
 
+        console.log("Matched name is: " + matchName);
+        console.log("Matched image is: " + matchImage);
+
         friends.push(results);
 
-        res.status(200).end();
+        res.json({
+            matchName: matchName,
+            matchImage: matchImage
+        });
     });
 };

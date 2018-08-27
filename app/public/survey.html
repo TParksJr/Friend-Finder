@@ -157,7 +157,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">Submit</button>
-            <br><br>
+            <br><br><br>
         </form>
 
         <div id="resultsModal" class="modal fade" role="dialog" data-toggle="modal">
@@ -165,15 +165,14 @@
 
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h2 class="modal-title"><strong>Closest Friend Match</strong></h2>
                     </div>
                     <div class="modal-body">
                         <h2 id="matchName">Placeholder text.</h2>
-                        <img id="matchImg" class="materialboxed" width="500" src="">
+                        <img id="matchImg" class="materialboxed" src="">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default"><a href="./survey" class="modal-close" id="close">New
+                        <button type="button" class="btn btn-default"><a href="/survey" class="modal-close" id="close">New
                                 Survey</a></button>
                     </div>
                 </div>
@@ -228,13 +227,19 @@
                     ]
                 };
 
-                $.post("/api/friends", newFriend).done(function (data) {
+                $.post("/api/friends", newFriend, function(req, res) {
+                    console.log("Request is " + req);
+                    console.log("Response is " + res);
+                }).done(function (data) {
+                    console.log("Data is " + data);
                     $("#matchName").text(data.matchName);
                     $("#matchImg").attr("src", data.matchImage);
+                    $("#matchImg").attr("width", "300px");
+                    $("#matchImg").attr("height", "auto");
                     $("#resultsModal").modal("toggle");
                 });
 
-                $("#name").val(""),
+                /*$("#name").val(""),
                 $("#photo").val(""),
                 $("#q1").val(""),
                 $("#q2").val(""),
@@ -245,7 +250,7 @@
                 $("#q7").val(""),
                 $("#q8").val(""),
                 $("#q9").val(""),
-                $("#q10").val("")
+                $("#q10").val("")*/
             });
         });
 
