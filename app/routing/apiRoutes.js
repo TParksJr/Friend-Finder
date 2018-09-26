@@ -9,7 +9,6 @@ module.exports = function (app) {
     app.post("/api/friends", function (req, res) {
 
         var results = req.body;
-        console.log("Results are: " + results);
         var newUserScores = results.scores;
         var matchName = "";
         var matchImage = "";
@@ -26,9 +25,6 @@ module.exports = function (app) {
                 matchImage = friends[i].photo;
             };
         };
-
-        console.log("Matched name is: " + matchName);
-        console.log("Matched image is: " + matchImage);
 
         friends.push(results);
 
